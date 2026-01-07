@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Portafolio Unidad 3 | Práctica Docente</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="hero">
+  <h1>Portafolio Interactivo</h1>
+  <p>Unidad 3 · Estimulación oportuna y transiciones</p>
+  <button onclick="scrollToSection('unidad')">Iniciar recorrido</button>
+</header>
+
+<section id="unidad" class="section">
+  <h2>Unidad 3</h2>
+  <div class="cards">
+    <div class="card" onclick="mostrar('bloque1')">
+      <h3>Estimulación y transiciones</h3>
+      <p>Acompañamiento emocional y adaptación</p>
+    </div>
+    <div class="card" onclick="mostrar('bloque2')">
+      <h3>Estimulación oportuna</h3>
+      <p>Motricidad, autonomía y familia</p>
+    </div>
+    <div class="card" onclick="mostrar('bloque3')">
+      <h3>Transiciones seguras</h3>
+      <p>Rutinas que generan confianza</p>
+    </div>
+  </div>
+</section>
+
+<section id="contenido" class="section hidden">
+  <div id="detalle"></div>
+</section>
+
+<section class="section">
+  <h2>Comunidad de práctica</h2>
+  <p>
+    Participar en la comunidad de práctica fue una experiencia enriquecedora,
+    ya que permitió compartir ideas, reflexionar sobre dilemas docentes
+    y fortalecer el trabajo colaborativo entre colegas.
+  </p>
+</section>
+
+<footer>
+  <p>Portafolio personal · Práctica docente</p>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>
