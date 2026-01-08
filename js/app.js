@@ -29,7 +29,7 @@ function mostrar(bloque) {
   setTimeout(() => {
     detalle.classList.add("animado");
     seccionContenido.scrollIntoView({ behavior: "smooth" });
-  }, 50);
+  }
 
 function volver() {
   const seccionContenido = document.getElementById("contenido");
