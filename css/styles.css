@@ -26,6 +26,16 @@ body {
   margin-top: 1rem;
 }
 
+.hero .btn {
+  display: inline-block;
+  background: white;
+  color: #333;
+  padding: 0.8rem 1.5rem;
+  border-radius: 20px;
+  text-decoration: none;
+  margin-top: 1rem;
+}
+
 .section {
   padding: 3rem 1rem;
   max-width: 900px;
