@@ -3,7 +3,7 @@ function mostrar(id) {
   const tarjetas = document.querySelector(".cards");
   const contenedor = document.getElementById("detalle");
 
-  fetch("data/contenido.json")
+  fetch("./data/contenido.json")
     .then(response => response.json())
     .then(data => {
       const item = data[id];
