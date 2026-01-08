@@ -3,7 +3,7 @@ function mostrar(id) {
   const tarjetas = document.querySelector(".cards");
   const contenedor = document.getElementById("detalle");
 
-  fetch("contenido.json")
+  fetch("data/contenido.json")
     .then(response => response.json())
     .then(data => {
       const item = data[id];
@@ -41,7 +41,7 @@ function mostrar(id) {
       contenedor.scrollIntoView({ behavior: "smooth" });
     })
     .catch(error => {
-      console.error("Error al cargar el contenido:", error);
+      console.error("Error al cargar contenido:", error);
     });
 }
 
