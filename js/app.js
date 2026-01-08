@@ -18,7 +18,8 @@ function mostrar(bloque) {
     </div>
     <p>${contenido.texto}</p>
 
-    <button class="volver" onclick="volver()">⬅ Volver a las tarjetas</button>
+   <button class="volver" id="btnVolver">⬅ Volver a las tarjetas</button>
+
   `;
 
   // 1️⃣ Mostrar primero el contenido
@@ -30,11 +31,13 @@ function mostrar(bloque) {
     seccionContenido.scrollIntoView({ behavior: "smooth" });
   }, 50);
 
-  function volver() {
-  document.getElementById("contenido").classList.add("hidden");
-  document.getElementById("unidad").scrollIntoView({ behavior: "smooth" });
+function volver() {
+  const seccionContenido = document.getElementById("contenido");
+  seccionContenido.classList.add("hidden");
+
+  document.getElementById("unidad")
+    .scrollIntoView({ behavior: "smooth" });
 }
 
-}
 
 
