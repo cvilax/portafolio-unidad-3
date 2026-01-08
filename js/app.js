@@ -1,43 +1,83 @@
 let datos = {};
+let datosCargados = false;
 
+/* ==========================
+   CARGA DEL CONTENIDO JSON
+========================== */
 fetch("./data/contenido.json")
-  .then(res => res.json())
-  .then(json => datos = json);
+  .then(response => {
+    if (!response.ok) {
+      throw new Error("No se pudo cargar contenido.json");
+    }
+    return response.json();
+  })
+  .then(json => {
+    datos = json;
+    datosCargados = true;
+  })
+  .catch(error => {
+    console.error("Error cargando el contenido:", error);
+  });
 
+/* ==========================
+   MOSTRAR CONTENIDO
+========================== */
 function mostrar(bloque) {
+  if (!datosCargados) {
+    alert("El contenido aún se está cargando, intenta nuevamente.");
+    return;
+  }
+
   const contenido = datos[bloque];
+  if (!contenido) {
+    console.error("Bloque no encontrado:", bloque);
+    return;
+  }
+
   const detalle = document.getElementById("detalle");
   const seccionContenido = document.getElementById("contenido");
 
+  // Reiniciar animación
   detalle.classList.remove("animado");
 
+  // Inyectar contenido
   detalle.innerHTML = `
     <div class="detalle-header">
       <span class="icono">${contenido.icono}</span>
       <h2>${contenido.titulo}</h2>
     </div>
+
     <p>${contenido.texto}</p>
 
-   <button class="volver" id="btnVolver">⬅ Volver a las tarjetas</button>
-
+    <button class="volver" id="btnVolver">⬅ Volver a las tarjetas</button>
   `;
 
-  // 1️⃣ Mostrar primero el contenido
+  // Mostrar sección
   seccionContenido.classList.remove("hidden");
 
-  // 2️⃣ Esperar a que el navegador lo pinte
+  // Esperar render + animar + bajar
   setTimeout(() => {
     detalle.classList.add("animado");
     seccionContenido.scrollIntoView({ behavior: "smooth" });
-  }
+  }, 50);
 
-function volver() {
-  const seccionContenido = document.getElementById("contenido");
-  seccionContenido.classList.add("hidden");
-
-  document.getElementById("unidad")
-    .scrollIntoView({ behavior: "smooth" });
+  // Conectar botón volver
+  const btnVolver = document.getElementById("btnVolver");
+  btnVolver.addEventListener("click", volver);
 }
 
+/* ==========================
+   VOLVER AL TARJETERO
+========================== */
+function volver() {
+  const seccionContenido = document.getElementById("contenido");
+  const seccionUnidad = document.getElementById("unidad");
 
+  // Ocultar contenido
+  seccionContenido.classList.add("hidden");
 
+  // Esperar recalculo del layout y subir
+  setTimeout(() => {
+    seccionUnidad.scrollIntoView({ behavior: "smooth" });
+  }, 50);
+}
