@@ -1,83 +1,55 @@
-let datos = {};
-let datosCargados = false;
+const tarjetas = document.querySelector(".cards");
+const contenedor = document.getElementById("detalle");
 
-/* ==========================
-   CARGA DEL CONTENIDO JSON
-========================== */
-fetch("./data/contenido.json")
-  .then(response => {
-    if (!response.ok) {
-      throw new Error("No se pudo cargar contenido.json");
-    }
-    return response.json();
-  })
-  .then(json => {
-    datos = json;
-    datosCargados = true;
-  })
-  .catch(error => {
-    console.error("Error cargando el contenido:", error);
-  });
+/* Mostrar contenido al hacer clic en una tarjeta */
+function mostrar(id) {
+  fetch("contenido.json")
+    .then(response => response.json())
+    .then(data => {
+      const item = data[id];
 
-/* ==========================
-   MOSTRAR CONTENIDO
-========================== */
-function mostrar(bloque) {
-  if (!datosCargados) {
-    alert("El contenido aún se está cargando, intenta nuevamente.");
-    return;
-  }
+      let imagenHTML = "";
 
-  const contenido = datos[bloque];
-  if (!contenido) {
-    console.error("Bloque no encontrado:", bloque);
-    return;
-  }
+      if (id === "bloque1") {
+        imagenHTML = `<img src="img/bloque1.jpg" alt="Transiciones emocionales" class="img-seccion">`;
+      }
 
-  const detalle = document.getElementById("detalle");
-  const seccionContenido = document.getElementById("contenido");
+      if (id === "bloque2") {
+        imagenHTML = `<img src="img/bloque2.jpg" alt="Estimulación oportuna" class="img-seccion">`;
+      }
 
-  // Reiniciar animación
-  detalle.classList.remove("animado");
+      if (id === "bloque3") {
+        imagenHTML = `<img src="img/bloque3.jpg" alt="Transiciones seguras" class="img-seccion">`;
+      }
 
-  // Inyectar contenido
-  detalle.innerHTML = `
-    <div class="detalle-header">
-      <span class="icono">${contenido.icono}</span>
-      <h2>${contenido.titulo}</h2>
-    </div>
+      contenedor.innerHTML = `
+        <div class="detalle-contenido">
+          <h3>${item.icono} ${item.titulo}</h3>
 
-    <p>${contenido.texto}</p>
+          <div class="detalle-grid">
+            ${imagenHTML}
+            <p>${item.texto}</p>
+          </div>
 
-    <button class="volver" id="btnVolver">⬅ Volver a las tarjetas</button>
-  `;
+          <button class="btn volver" onclick="volver()">Volver a las tarjetas</button>
+        </div>
+      `;
 
-  // Mostrar sección
-  seccionContenido.classList.remove("hidden");
+      tarjetas.style.display = "none";
+      contenedor.style.display = "block";
 
-  // Esperar render + animar + bajar
-  setTimeout(() => {
-    detalle.classList.add("animado");
-    seccionContenido.scrollIntoView({ behavior: "smooth" });
-  }, 50);
-
-  // Conectar botón volver
-  const btnVolver = document.getElementById("btnVolver");
-  btnVolver.addEventListener("click", volver);
+      contenedor.scrollIntoView({ behavior: "smooth" });
+    })
+    .catch(error => {
+      contenedor.innerHTML = "<p>Error al cargar el contenido.</p>";
+      console.error("Error:", error);
+    });
 }
 
-/* ==========================
-   VOLVER AL TARJETERO
-========================== */
+/* Volver a mostrar las tarjetas */
 function volver() {
-  const seccionContenido = document.getElementById("contenido");
-  const seccionUnidad = document.getElementById("unidad");
+  contenedor.style.display = "none";
+  tarjetas.style.display = "grid";
 
-  // Ocultar contenido
-  seccionContenido.classList.add("hidden");
-
-  // Esperar recalculo del layout y subir
-  setTimeout(() => {
-    seccionUnidad.scrollIntoView({ behavior: "smooth" });
-  }, 50);
+  tarjetas.scrollIntoView({ behavior: "smooth" });
 }
