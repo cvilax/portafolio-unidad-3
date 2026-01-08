@@ -8,6 +8,8 @@ function mostrar(bloque) {
   const contenido = datos[bloque];
   const detalle = document.getElementById("detalle");
 
+  detalle.classList.remove("animado"); // reinicia animación
+
   detalle.innerHTML = `
     <div class="detalle-header">
       <span class="icono">${contenido.icono}</span>
@@ -19,7 +21,16 @@ function mostrar(bloque) {
   `;
 
   document.getElementById("contenido").classList.remove("hidden");
+
+  // fuerza reflow para que la animación se reinicie bien
+  void detalle.offsetWidth;
+
+  detalle.classList.add("animado");
+
+  // 🔽 baja automáticamente al contenido
   scrollToSection("contenido");
+}
+
 }
 
 function volver() {
