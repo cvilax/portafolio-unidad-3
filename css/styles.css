@@ -123,3 +123,19 @@ footer {
   background: #5c85e6;
 }
 
+/* Animación de entrada del contenido */
+@keyframes aparecerSuave {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animado {
+  animation: aparecerSuave 0.5s ease-out;
+}
+
