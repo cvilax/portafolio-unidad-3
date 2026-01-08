@@ -1,8 +1,8 @@
-const tarjetas = document.querySelector(".cards");
-const contenedor = document.getElementById("detalle");
-
 /* Mostrar contenido al hacer clic en una tarjeta */
 function mostrar(id) {
+  const tarjetas = document.querySelector(".cards");
+  const contenedor = document.getElementById("detalle");
+
   fetch("contenido.json")
     .then(response => response.json())
     .then(data => {
@@ -41,13 +41,15 @@ function mostrar(id) {
       contenedor.scrollIntoView({ behavior: "smooth" });
     })
     .catch(error => {
-      contenedor.innerHTML = "<p>Error al cargar el contenido.</p>";
-      console.error("Error:", error);
+      console.error("Error al cargar el contenido:", error);
     });
 }
 
-/* Volver a mostrar las tarjetas */
+/* Volver a las tarjetas */
 function volver() {
+  const tarjetas = document.querySelector(".cards");
+  const contenedor = document.getElementById("detalle");
+
   contenedor.style.display = "none";
   tarjetas.style.display = "grid";
 
