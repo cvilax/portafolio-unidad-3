@@ -7,8 +7,9 @@ fetch("./data/contenido.json")
 function mostrar(bloque) {
   const contenido = datos[bloque];
   const detalle = document.getElementById("detalle");
+  const seccionContenido = document.getElementById("contenido");
 
-  detalle.classList.remove("animado"); // reinicia animación
+  detalle.classList.remove("animado");
 
   detalle.innerHTML = `
     <div class="detalle-header">
@@ -20,21 +21,20 @@ function mostrar(bloque) {
     <button class="volver" onclick="volver()">⬅ Volver a las tarjetas</button>
   `;
 
-  document.getElementById("contenido").classList.remove("hidden");
+  // 1️⃣ Mostrar primero el contenido
+  seccionContenido.classList.remove("hidden");
 
-  // fuerza reflow para que la animación se reinicie bien
-  void detalle.offsetWidth;
+  // 2️⃣ Esperar a que el navegador lo pinte
+  setTimeout(() => {
+    detalle.classList.add("animado");
+    seccionContenido.scrollIntoView({ behavior: "smooth" });
+  }, 50);
 
-  detalle.classList.add("animado");
-
-  // 🔽 baja automáticamente al contenido
-  scrollToSection("contenido");
-}
-
-}
-
-function volver() {
+  function volver() {
   document.getElementById("contenido").classList.add("hidden");
-  scrollToSection("unidad");
+  document.getElementById("unidad").scrollIntoView({ behavior: "smooth" });
 }
+
+}
+
 
