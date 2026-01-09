@@ -55,3 +55,16 @@ function volver() {
 
   tarjetas.scrollIntoView({ behavior: "smooth" });
 }
+
+function abrirImagen(img) {
+  const overlay = document.getElementById("overlay-img");
+  const overlayImg = document.getElementById("overlay-contenido");
+
+  overlayImg.src = img.src;
+  overlay.style.display = "flex";
+}
+
+function cerrarImagen() {
+  const overlay = document.getElementById("overlay-img");
+  overlay.style.display = "none";
+}
