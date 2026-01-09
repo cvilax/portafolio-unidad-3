@@ -179,6 +179,7 @@ footer {
 .mini-galeria {
   display: flex;
   gap: 1rem;
+  justify-content: center;   /* 👈 centra horizontalmente */
   overflow-x: auto;
   padding: 1rem 0;
   scroll-snap-type: x mandatory;
@@ -194,6 +195,7 @@ footer {
   flex-shrink: 0;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   transition: transform 0.2s ease;
+  
 }
 
 .mini-galeria img:hover {
