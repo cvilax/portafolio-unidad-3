@@ -175,3 +175,28 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+
+.mini-galeria {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding: 1rem 0;
+  scroll-snap-type: x mandatory;
+}
+
+.mini-galeria img {
+  width: 120px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+  cursor: pointer;
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease;
+}
+
+.mini-galeria img:hover {
+  transform: scale(1.05);
+}
+
